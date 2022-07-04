@@ -1,0 +1,19 @@
+{
+  "name": "pm2-lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "set app_mode=local& nodemon ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18",
+    "loadtest": "*"
+  }
+}
