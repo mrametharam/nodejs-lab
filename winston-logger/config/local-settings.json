@@ -1,0 +1,8 @@
+{
+    "logOptions": {
+        "logFilePath": "s:/logs/test",
+        "printStack": true,
+        "maxFileAge": "5m",
+        "maxFileSize": "10m"
+    }
+}

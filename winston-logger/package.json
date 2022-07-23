@@ -1,0 +1,20 @@
+{
+  "name": "winston-lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "set mode=local& nodemon --inspect --watch app --ext js . --no-redis --no-email-alerts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "winston": "^3.8.1",
+    "winston-daily-rotate-file": "^4.7.1",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
