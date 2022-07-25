@@ -1,0 +1,5 @@
+GET http://localhost:7200/photos?albumId=0&usedCached=0
+
+###
+
+GET http://localhost:7200/photos/60
