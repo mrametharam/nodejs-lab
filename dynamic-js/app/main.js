@@ -1,89 +1,23 @@
-const axios = require('axios');
+global.__cache = [];
 
-const acdData = {
-    callid: 'this.getCallID()',
-    ucid: 'this.getUCID()',
-    distributingvdn: 'this.getVDN()',
-    EventCause: 'this.getEventCause()',
-    calleddevice: 'this.getCalledDevice()',
-    callingdevice: 'this.getCallingDevice()',
-    uui: 'this.getUUI()',
-    distributingdevice: 'this.getDistributingDevice()',
-    reason: 'this.getReason()',
-    acdcall: 'this.getACDCall()',
-    skillExt: 'this.getACD()',
-    phonenumber: 'this.getCallingDevice()'
+const stringJs = require('./dynamic-js');
+const { cacheData: cache, checkCache: chk } = require('./helpers');
+
+const djs = eval(stringJs);
+
+let id = 0;
+
+const data = {
+    user: 'kyle',
+    role: 'admin',
+    level: 3
 };
 
-const jsScript = `
-const { status, data } = await axios.get('https://random-data-api.com/api/users/random_user');
-console.log("Status", status);
-console.log("axios-data", data);
-console.log('DeliveredEventFn START...', JSON.stringify(inData), 'DeliveredEventFn END');
-throw Error("Crash test!!!");`;
+setInterval(() => {
+    id++;
+    data.id = id;
 
-const jsScriptOld = `
-let status = -1;
-let data = {};
+    djs(data, cache);
+}, 9 * 1000);
 
-axios
-    .get('https://random-data-api.com/api/users/random_user')
-    .then((result) => {
-        status = result.status;
-        data = result.data;
-
-        console.log('Status', status);
-        console.log('axios-data', data);
-        console.log('DeliveredEventFn START...', JSON.stringify(inData), 'DeliveredEventFn END');
-        throw Error('Crash test!!!');
-    })
-    .catch((err) => {
-        console.error(err);
-    });
-
-`
-
-const jsWrapper = `
-try {
-    ${jsScriptOld}
-} catch (err) {
-    console.error(err);
-}
-`;
-
-const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
-
-async function test(inData, axios) {
-    try {
-        let status = -1;
-        let data = {};
-
-        axios
-            .get('https://random-data-api.com/api/users/random_user')
-            .then((result) => {
-                status = result.status;
-                data = result.data;
-
-                console.log('Status', status);
-                console.log('axios-data', data);
-                console.log('DeliveredEventFn START...', JSON.stringify(inData), 'DeliveredEventFn END');
-                throw Error('Crash test!!!');
-            })
-            // .catch((err) => {
-            //     console.error(err);
-            // });
-    } catch (err) {
-        console.error("ERRORXXX", err);
-    }
-}
-
-async function main() {
-    // test(acdData, axios);
-
-    const runJs = new AsyncFunction('inData, axios', jsWrapper);
-    runJs(acdData, axios);
-
-    //    console.log(jsWrapper);
-}
-
-main();
+setInterval(chk, 5 * 1000);

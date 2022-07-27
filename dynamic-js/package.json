@@ -10,9 +10,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.18"
-  },
-  "dependencies": {
-    "axios": "^0.27.2"
+    "nodemon": "^2.0.19"
   }
 }
