@@ -1,4 +1,5 @@
-require("./lab-01");
+// require("./lab-01");
+require("./lab-02");
 
 process.exit();
 
