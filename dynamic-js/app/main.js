@@ -1,11 +1,21 @@
 global.__cache = [];
 
 const stringJs = require('./dynamic-js');
-const { cacheData: cache, checkCache: chk } = require('./helpers');
+const { cacheData: cache, checkCache: chk, getData } = require('./helpers');
 
 const djs = eval(stringJs);
 
 let id = 0;
+
+const runTest = () => {
+    id++;
+    data.id = id;
+
+    djs(data, cache);
+
+    const x = getData(id);
+    console.log({ x });
+};
 
 const data = {
     user: 'kyle',
@@ -14,10 +24,10 @@ const data = {
 };
 
 setInterval(() => {
-    id++;
-    data.id = id;
-
-    djs(data, cache);
+    runTest;
 }, 9 * 1000);
 
-setInterval(chk, 5 * 1000);
+runTest();
+
+//setInterval(chk, 5 * 1000);
+

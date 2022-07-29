@@ -26,4 +26,24 @@ const checkCache = () => {
     console.log('\n', { __cache }, '\n');
 };
 
-module.exports = { cacheData, checkCache };
+const getData = (id) => {
+    let retVal = null;
+    const method = 1;
+
+    if (method == 1) {
+        for (let index = 0; index < __cache.length; index++) {
+            const element = __cache[index];
+            if (element.id == id) {
+                console.log({ element });
+                retVal = element;
+                break;
+            }
+        }
+    } else if (method == 2) {
+        
+    }
+    
+    return retVal;
+};
+
+module.exports = { cacheData, checkCache, getData };
